@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CEKIP - Centro Kinésico Peñablanca</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a0caff",
+                        "surface-tint": "#425e91",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dbe3ee",
+                        "on-secondary-fixed": "#001c37",
+                        "on-primary-container": "#89a5dd",
+                        "on-secondary-container": "#004375",
+                        "outline-variant": "#c4c6d0",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#e9f1fc",
+                        "secondary-fixed": "#d2e4ff",
+                        "primary": "#002452",
+                        "on-surface": "#141c24",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdcc1",
+                        "tertiary-container": "#5b3000",
+                        "surface-container-highest": "#dbe3ee",
+                        "surface-dim": "#d3dbe6",
+                        "surface-bright": "#f7f9ff",
+                        "on-tertiary-fixed-variant": "#693c0a",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#acc7ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#1b3a6b",
+                        "on-primary-fixed": "#001a40",
+                        "on-primary-fixed-variant": "#294678",
+                        "on-background": "#141c24",
+                        "tertiary": "#3c1e00",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e1e9f4",
+                        "inverse-surface": "#293139",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f7f9ff",
+                        "outline": "#747780",
+                        "on-tertiary-fixed": "#2e1500",
+                        "secondary-container": "#6fb2fd",
+                        "surface-container": "#e7effa",
+                        "surface-container-low": "#edf4ff",
+                        "secondary": "#0061a5",
+                        "on-surface-variant": "#44474f",
+                        "on-tertiary-container": "#d7985f",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-secondary-fixed-variant": "#00497e",
+                        "surface": "#f7f9ff",
+                        "primary-fixed": "#d7e2ff",
+                        "tertiary-fixed-dim": "#fcb87d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .asymmetric-leaf {
+            border-radius: 0.75rem 0 0.75rem 0;
+        }
+
+        .glass-nav {
+            background: rgba(247, 249, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+
+        .floating-whatsapp {
+            box-shadow: 0 24px 48px rgba(0, 97, 165, 0.22);
+            animation: floatPulse 2.8s ease-in-out infinite;
+        }
+
+        .hero-fade-up {
+            opacity: 0;
+            animation: heroFadeUp 0.9s ease-out forwards;
+        }
+
+        .hero-fade-up-delay {
+            opacity: 0;
+            animation: heroFadeUp 1.1s ease-out 0.18s forwards;
+        }
+
+        .hero-card {
+            animation: heroCardFloat 6s ease-in-out infinite;
+        }
+
+        .hero-orbit {
+            animation: heroOrbit 14s linear infinite;
+        }
+
+        .hero-glow {
+            animation: heroGlow 4.5s ease-in-out infinite;
+        }
+
+        .zoom-dialog[hidden] {
+            display: none;
+        }
+
+        .zoom-dialog {
+            background: rgba(6, 24, 52, 0.86);
+            backdrop-filter: blur(14px);
+        }
+
+        .zoom-image {
+            transform-origin: center center;
+            transition: transform 180ms ease;
+            cursor: zoom-in;
+        }
+
+        .mobile-menu-panel[hidden] {
+            display: none;
+        }
+
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-card::after {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(111, 178, 253, 0.18), transparent 45%);
+            opacity: 0;
+            transition: opacity 160ms ease;
+            pointer-events: none;
+        }
+
+        .spotlight-card:hover::after,
+        .spotlight-card:focus-within::after {
+            opacity: 1;
+        }
+
+        .spotlight-card:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes floatPulse {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes heroFadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroCardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes heroOrbit {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes heroGlow {
+
+            0%,
+            100% {
+                opacity: 0.45;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.72;
+                transform: scale(1.08);
+            }
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: radial-gradient(circle at 20% 20%, #edf4ff 0, #edf4ff 35%, rgba(237, 244, 255, 0.4) 60%, rgba(237, 244, 255, 0.2) 100%);
+        }
+
+        .section-shell {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .elevated-card {
+            border: 1px solid rgba(0, 36, 82, 0.08);
+            box-shadow: 0 12px 40px rgba(12, 28, 52, 0.08);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .elevated-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 50px rgba(12, 28, 52, 0.12);
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 1rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(111, 178, 253, 0.2), rgba(0, 97, 165, 0.12));
+            color: #002452;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            border: 1px solid rgba(111, 178, 253, 0.25);
+        }
+
+        .team-card-img {
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover .team-card-img {
+            transform: scale(1.06);
+        }
+
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .differentiator-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .differentiator-card:hover .differentiator-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .cta-glow {
+            position: relative;
+        }
+
+        .cta-glow::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #6fb2fd, #0061a5, #25D366);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            filter: blur(8px);
+        }
+
+        .cta-glow:hover::before {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 w-full z-50 bg-[#f7f9ff]/80 dark:bg-[#141c24]/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(20,28,36,0.04)]">
+        <nav class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+            <a class="flex items-center gap-3" href="#inicio">
+                <img alt="Logo CEKIP" class="w-12 h-12 rounded-2xl object-cover shadow-lg" src="multimedia/logo.jpg" />
+                <div>
+                    <div class="text-xl font-bold tracking-tighter text-[#002452] dark:text-[#edf4ff]">CEKIP</div>
+                    <p class="text-xs text-[#141c24]/60">Centro Kinésico Peñablanca</p>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-[#002452] dark:text-[#6fb2fd] font-['Plus_Jakarta_Sans'] font-semibold tracking-[-0.02em] transition-all"
+                    href="#inicio">Inicio</a>
+                <a class="text-[#141c24]/60 dark:text-[#edf4ff]/60 hover:bg-[#e1e9f4] dark:hover:bg-[#1b3a6b] px-3 py-1 rounded-lg transition-all"
+                    href="#servicios">Servicios</a>
+                <a class="text-[#141c24]/60 dark:text-[#edf4ff]/60 hover:bg-[#e1e9f4] dark:hover:bg-[#1b3a6b] px-3 py-1 rounded-lg transition-all"
+                    href="#equipo">Equipo</a>
+                <a class="text-[#141c24]/60 dark:text-[#edf4ff]/60 hover:bg-[#e1e9f4] dark:hover:bg-[#1b3a6b] px-3 py-1 rounded-lg transition-all"
+                    href="#ubicacion">Ubicación</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="material-symbols-outlined text-[#002452] cursor-pointer" data-icon="chat"
+                    href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora."
+                    target="_blank">chat</a>
+                <button aria-controls="mobile-menu" aria-expanded="false"
+                    class="material-symbols-outlined md:hidden text-[#002452] cursor-pointer" data-icon="menu"
+                    id="mobile-menu-toggle" type="button">menu</button>
+            </div>
+        </nav>
+        <div class="mobile-menu-panel border-t border-primary/10 bg-white/95 px-6 py-4 shadow-lg md:hidden" hidden
+            id="mobile-menu">
+            <div class="flex flex-col gap-2">
+                <a class="rounded-xl px-4 py-3 font-semibold text-[#002452] transition hover:bg-[#edf4ff]"
+                    href="#inicio">Inicio</a>
+                <a class="rounded-xl px-4 py-3 font-semibold text-[#002452] transition hover:bg-[#edf4ff]"
+                    href="#servicios">Servicios</a>
+                <a class="rounded-xl px-4 py-3 font-semibold text-[#002452] transition hover:bg-[#edf4ff]"
+                    href="#equipo">Equipo</a>
+                <a class="rounded-xl px-4 py-3 font-semibold text-[#002452] transition hover:bg-[#edf4ff]"
+                    href="#ubicacion">Ubicación</a>
+                <a class="mt-2 rounded-xl bg-primary px-4 py-3 text-center font-semibold text-white transition hover:bg-[#123b78]"
+                    href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora."
+                    target="_blank">Agendar por WhatsApp</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- Hero Section -->
+        <section
+            class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(111,178,253,0.35),_transparent_28%),linear-gradient(135deg,_#062b5c_0%,_#123b78_48%,_#0d2e60_100%)]"
+            id="inicio">
+            <div class="absolute inset-0 opacity-40">
+                <div class="hero-glow absolute left-[-8rem] top-16 h-72 w-72 rounded-full bg-[#6fb2fd]/40 blur-3xl">
+                </div>
+                <div class="hero-glow absolute right-[-5rem] bottom-10 h-80 w-80 rounded-full bg-white/10 blur-3xl">
+                </div>
+            </div>
+            <div class="absolute right-[10%] top-28 h-40 w-40 hero-orbit rounded-full border border-white/10"></div>
+            <div class="absolute right-[12%] top-32 h-40 w-40 rounded-full border border-dashed border-white/15"></div>
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-[1.05fr_0.95fr] gap-14 items-center relative">
+                <div class="z-10 hero-fade-up">
+                    <div
+                        class="inline-flex items-center gap-3 bg-white/10 border border-white/15 rounded-full px-5 py-2.5 mb-6 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-sm">
+                        <img alt="Logo CEKIP" class="w-10 h-10 rounded-full object-cover border-2 border-white/30 shadow-md"
+                            src="multimedia/logo.jpg" />
+                        <span class="text-sm font-semibold text-white"><i class="fa-solid fa-heart-pulse mr-1.5 text-[#6fb2fd]"></i>Atención kinésica en Peñablanca</span>
+                    </div>
+                    <h1
+                        class="text-4xl md:text-6xl font-extrabold text-white leading-[1.05] tracking-[-0.03em] mb-6 max-w-xl">
+                        Recuperación kinésica con enfoque humano y precisión clínica
+                    </h1>
+                    <p class="text-lg md:text-xl text-[#d7e2ff] font-body leading-relaxed mb-10 max-w-xl">
+                        Evaluación, tratamiento y seguimiento profesional para acompañar tu proceso con cercanía,
+                        experiencia y una atención personalizada.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a class="cta-glow bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-bold hover:-translate-y-1 transition-all active:scale-95 duration-200 shadow-[0_18px_40px_rgba(0,0,0,0.18)] inline-flex items-center gap-2"
+                            href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora."
+                            target="_blank">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Agenda tu hora
+                        </a>
+                        <a class="border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all inline-flex items-center gap-2"
+                            href="#servicios">
+                            <i class="fa-solid fa-hand-holding-medical"></i> Ver servicios
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl hero-fade-up-delay">
+                        <div class="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md px-5 py-4 hover:bg-white/15 transition-colors">
+                            <p class="text-xs uppercase tracking-[0.18em] text-white/55 mb-1"><i class="fa-solid fa-location-dot mr-1"></i>Ubicación</p>
+                            <p class="text-sm font-semibold text-white">Manuel Montt #551</p>
+                        </div>
+                        <div class="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md px-5 py-4 hover:bg-white/15 transition-colors">
+                            <p class="text-xs uppercase tracking-[0.18em] text-white/55 mb-1"><i class="fa-solid fa-phone mr-1"></i>Contacto</p>
+                            <p class="text-sm font-semibold text-white">WhatsApp directo</p>
+                        </div>
+                        <div class="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md px-5 py-4 hover:bg-white/15 transition-colors">
+                            <p class="text-xs uppercase tracking-[0.18em] text-white/55 mb-1"><i class="fa-regular fa-clock mr-1"></i>Horario</p>
+                            <p class="text-sm font-semibold text-white">Lun a Sáb</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 hero-fade-up-delay">
+                    <div class="hero-card relative mx-auto w-full max-w-[22rem] md:max-w-xl">
+                        <div class="absolute -inset-4 md:-inset-5 rounded-[2rem] bg-white/10 blur-2xl"></div>
+                        <div
+                            class="absolute -right-3 top-8 h-16 w-16 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md md:-right-6 md:top-10 md:h-24 md:w-24">
+                        </div>
+                        <div
+                            class="absolute left-4 right-4 -bottom-5 rounded-2xl border border-white/15 bg-[#0d2e60]/80 px-4 py-3 backdrop-blur-md shadow-xl md:left-auto md:right-auto md:-left-6 md:bottom-12 md:px-5 md:py-4">
+                            <p class="text-xs uppercase tracking-[0.18em] text-white/55 mb-1">Agenda rápida</p>
+                        </div>
+                        <div
+                            class="relative overflow-hidden rounded-[2rem] border border-white/20 bg-[linear-gradient(145deg,rgba(255,255,255,0.98),rgba(236,243,255,0.92))] p-3 md:p-5 shadow-[0_30px_80px_rgba(0,18,46,0.35)]">
+                            <div class="rounded-[1.5rem] bg-white p-3 md:p-4 shadow-inner">
+                                <button
+                                    class="group block w-full rounded-[1.25rem] focus:outline-none focus:ring-2 focus:ring-[#6fb2fd]/70"
+                                    data-zoom-image="multimedia/hero.jpg" data-zoom-title="Hero CEKIP" type="button">
+                                    <img alt="Hero CEKIP"
+                                        class="w-full h-[22rem] object-contain object-center rounded-[1.25rem] bg-[#f8fbff] md:h-[480px]"
+                                        src="multimedia/hero.jpg" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services Section (Bento-style Grid) -->
+        <section class="py-24 bg-gradient-to-b from-surface to-white" id="servicios">
+            <div class="section-shell">
+                <div class="mb-16 flex flex-col gap-3">
+                    <span class="pill-badge w-fit"><i class="fa-solid fa-star text-[0.6rem]"></i> Especialidades</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-primary mt-2">Nuestros Servicios</h2>
+                    <p class="text-on-surface-variant max-w-3xl text-base leading-relaxed">Atención integral con protocolos personalizados para
+                        cada etapa de tu recuperación.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Kinesiología Traumatológica -->
+                    <div
+                        class="md:col-span-2 bg-surface-container-lowest p-8 rounded-2xl elevated-card spotlight-card spotlight-card group">
+                        <div
+                            class="bg-surface-container-high w-14 h-14 flex items-center justify-center rounded-xl mb-6">
+                            <span class="material-symbols-outlined text-primary text-3xl"
+                                data-icon="rebase_edit">rebase_edit</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-3">Kinesiología Traumatológica</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Tratamiento especializado en lesiones
+                            óseas, musculares y articulares con enfoque en recuperación funcional acelerada.</p>
+                    </div>
+                    <!-- Neurorehabilitación -->
+                    <div class="bg-surface-container-low p-8 rounded-2xl elevated-card spotlight-card">
+                        <div
+                            class="bg-surface-container-lowest w-12 h-12 flex items-center justify-center rounded-lg mb-6">
+                            <span class="material-symbols-outlined text-primary"
+                                data-icon="psychology">psychology</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Neurorehabilitación</h3>
+                        <p class="text-on-surface-variant text-xs">Recuperación de funciones motoras en pacientes con
+                            afecciones del sistema nervioso.</p>
+                    </div>
+                    <!-- Quiropraxia -->
+                    <div class="bg-surface-container-lowest p-8 rounded-2xl elevated-card spotlight-card">
+                        <div
+                            class="bg-surface-container-low w-12 h-12 flex items-center justify-center rounded-lg mb-6">
+                            <span class="material-symbols-outlined text-primary" data-icon="back_hand">back_hand</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Quiropraxia</h3>
+                        <p class="text-on-surface-variant text-xs">Ajustes manuales de precisión para restaurar la
+                            movilidad espinal y el equilibrio corporal.</p>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="bg-surface-container-lowest p-8 rounded-2xl elevated-card spotlight-card">
+                        <div
+                            class="bg-surface-container-low w-12 h-12 flex items-center justify-center rounded-lg mb-6">
+                            <span class="material-symbols-outlined text-primary" data-icon="elderly">elderly</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Rehab. Geriátrica</h3>
+                        <p class="text-on-surface-variant text-xs">Atención integral enfocada en mantener la autonomía y
+                            calidad de vida del adulto mayor.</p>
+                    </div>
+                    <div
+                        class="md:col-span-2 bg-primary text-on-primary p-8 rounded-2xl flex flex-col justify-between overflow-hidden relative elevated-card">
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold mb-4">Reintegro Deportivo &amp; Recovery</h3>
+                            <p class="text-on-primary-container text-sm max-w-sm mb-6">Masoterapia avanzada y protocolos
+                                de retorno al deporte para atletas de alto rendimiento y aficionados.</p>
+                            <span class="material-symbols-outlined text-6xl opacity-20 absolute -right-4 -bottom-4"
+                                data-icon="sports_score">sports_score</span>
+                        </div>
+                        <button
+                            class="bg-white/10 hover:bg-white/20 w-fit px-4 py-2 rounded-lg text-sm transition-all z-10">Ver
+                            más</button>
+                    </div>
+                    <div class="bg-surface-container-lowest p-8 rounded-2xl elevated-card spotlight-card">
+                        <div
+                            class="bg-surface-container-low w-12 h-12 flex items-center justify-center rounded-lg mb-6">
+                            <span class="material-symbols-outlined text-primary" data-icon="air">air</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Kine. Respiratoria</h3>
+                        <p class="text-on-surface-variant text-xs">Atención IRA/ERA infantil y adultos para optimizar la
+                            función pulmonar.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Horario Section -->
+        <section class="py-20 bg-gradient-to-b from-surface to-white" id="horario">
+            <div class="section-shell">
+                <div class="text-center mb-12">
+                    <span class="pill-badge">Horario</span>
+
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <button
+                        class="block w-full focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-[1.5rem] overflow-hidden elevated-card"
+                        data-zoom-image="multimedia/horarios.jpg" data-zoom-title="Horarios de atención" type="button">
+                        <img alt="Horario CEKIP"
+                            class="w-full max-h-[28rem] object-contain bg-gradient-to-b from-white to-surface-container"
+                            src="multimedia/horarios.jpg" />
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- Team Section -->
+        <section class="py-24 bg-gradient-to-b from-surface-container-low to-white" id="equipo">
+            <div class="section-shell">
+                <div class="text-center mb-16">
+                    <span class="pill-badge mb-4"><i class="fa-solid fa-user-doctor text-[0.6rem]"></i> Profesionales</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-primary mt-2">Nuestro Equipo</h2>
+                    <p class="text-on-surface-variant mt-4 text-base">Profesionales apasionados por tu recuperación</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Bárbara Lillo -->
+                    <div
+                        class="team-card bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col items-center p-6 text-center elevated-card spotlight-card group">
+                        <div class="relative mb-6">
+                            <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-[#6fb2fd] to-[#0061a5] opacity-0 group-hover:opacity-30 transition-opacity blur-md"></div>
+                            <img alt="Klga. Bárbara Lillo"
+                                class="team-card-img relative w-32 h-32 object-cover rounded-full border-4 border-surface-container-low"
+                                src="multimedia/barbara.jpg" />
+                        </div>
+                        <h4 class="text-lg font-bold text-primary">Klga. Bárbara Lillo Olivares</h4>
+                        <p class="text-secondary text-sm font-semibold mb-3 inline-flex items-center gap-1.5"><i class="fa-solid fa-stethoscope text-xs"></i>Kinesióloga</p>
+                        <p class="text-xs text-on-surface-variant leading-relaxed">Especialista en traumatología
+                            deportiva, kinesiología respiratoria infantil y neurorehabilitación.</p>
+                    </div>
+                    <!-- Diego Sánchez -->
+                    <div
+                        class="team-card bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col items-center p-6 text-center elevated-card spotlight-card group">
+                        <div class="relative mb-6">
+                            <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-[#6fb2fd] to-[#0061a5] opacity-0 group-hover:opacity-30 transition-opacity blur-md"></div>
+                            <img alt="Klgo. Diego Sánchez"
+                                class="team-card-img relative w-32 h-32 object-cover rounded-full border-4 border-surface-container-low"
+                                src="multimedia/diego.jpg" />
+                        </div>
+                        <h4 class="text-lg font-bold text-primary">Klgo. Diego Sánchez Ramos</h4>
+                        <p class="text-secondary text-sm font-semibold mb-3 inline-flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-xs"></i>MSc. Terapia Manual</p>
+                        <p class="text-xs text-on-surface-variant leading-relaxed">Experto en columna, extremidades y
+                            reintegro deportivo avanzado.</p>
+                    </div>
+                    <!-- Daniel Espinosa -->
+                    <div
+                        class="team-card bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col items-center p-6 text-center elevated-card spotlight-card group">
+                        <div class="relative mb-6">
+                            <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-[#6fb2fd] to-[#0061a5] opacity-0 group-hover:opacity-30 transition-opacity blur-md"></div>
+                            <img alt="Klgo. Daniel Espinosa"
+                                class="team-card-img relative w-32 h-32 object-cover rounded-full border-4 border-surface-container-low"
+                                src="multimedia/daniel.jpg" />
+                        </div>
+                        <h4 class="text-lg font-bold text-primary">Klgo. Daniel Espinosa Farías</h4>
+                        <p class="text-secondary text-sm font-semibold mb-3 inline-flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-xs"></i>Máster en Gerontología</p>
+                        <p class="text-xs text-on-surface-variant leading-relaxed">Líder en gestión clínica y coaching
+                            en salud, especializado en terapia manual.</p>
+                    </div>
+                    <!-- Viviana Villarreal -->
+                    <div
+                        class="team-card bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col items-center p-6 text-center elevated-card spotlight-card group">
+                        <div class="relative mb-6">
+                            <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-[#6fb2fd] to-[#0061a5] opacity-0 group-hover:opacity-30 transition-opacity blur-md"></div>
+                            <img alt="Klga. Viviana Villarreal"
+                                class="team-card-img relative w-32 h-32 object-cover rounded-full border-4 border-surface-container-low"
+                                src="multimedia/viviana.jpg" />
+                        </div>
+                        <h4 class="text-lg font-bold text-primary">Klga. Viviana Villarreal Espinoza</h4>
+                        <p class="text-secondary text-sm font-semibold mb-3 inline-flex items-center gap-1.5"><i class="fa-solid fa-hand-holding-heart text-xs"></i>TENS</p>
+                        <p class="text-xs text-on-surface-variant leading-relaxed">Amplia experiencia asistencial en
+                            traumatología, geriatría y neurología.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Why CEKIP? (Differentiators) -->
+        <section class="py-24 bg-gradient-to-b from-white to-surface">
+            <div class="section-shell">
+                <div class="text-center mb-14">
+                    <span class="pill-badge mb-4"><i class="fa-solid fa-check-double text-[0.6rem]"></i> Ventajas</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-primary mt-2">¿Por qué CEKIP?</h2>
+                </div>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch justify-items-center max-w-5xl mx-auto">
+                    <div class="differentiator-card bg-surface-container-lowest p-10 rounded-3xl text-center elevated-card spotlight-card">
+                        <div class="differentiator-icon w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#d7e2ff] to-[#edf4ff] flex items-center justify-center">
+                            <i class="fa-solid fa-file-invoice-dollar text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Convenios</h3>
+                        <p class="text-on-surface-variant">Atención por Fonasa e Isapres para facilitar tu acceso a la
+                            salud.</p>
+                    </div>
+                    <div class="differentiator-card bg-surface-container-lowest p-10 rounded-3xl text-center elevated-card spotlight-card">
+                        <div class="differentiator-icon w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#d7e2ff] to-[#edf4ff] flex items-center justify-center">
+                            <i class="fa-solid fa-square-parking text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Parking Gratuito</h3>
+                        <p class="text-on-surface-variant">Contamos con estacionamiento exclusivo para tu comodidad.</p>
+                    </div>
+                    <div class="differentiator-card bg-surface-container-lowest p-10 rounded-3xl text-center elevated-card spotlight-card">
+                        <div class="differentiator-icon w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#d7e2ff] to-[#edf4ff] flex items-center justify-center">
+                            <i class="fa-regular fa-clock text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Horarios Amplios</h3>
+                        <p class="text-on-surface-variant">L-V 9AM a 9PM. Sábados 9AM a 1PM. Nos adaptamos a tu ritmo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials -->
+        <section class="py-24 bg-primary text-on-primary overflow-hidden">
+            <div class="section-shell">
+                <div class="text-center mb-16">
+                    <span class="pill-badge mb-4 bg-white/10 border-white/15 text-white"><i class="fa-solid fa-quote-left text-[0.6rem]"></i> Testimonios</span>
+                    <h2 class="text-3xl md:text-5xl font-bold mt-2">Historias de Recuperación</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="testimonial-card bg-white/5 p-8 rounded-2xl border border-white/10">
+                        <i class="fa-solid fa-quote-left text-2xl text-[#6fb2fd]/40 mb-4 block"></i>
+                        <div class="flex gap-1 mb-4 text-yellow-400">
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                        </div>
+                        <p class="italic text-white/90 leading-relaxed">"Excelente atención, los profesionales son muy dedicados. Logré recuperar la movilidad de mi
+                        hombro en pocas sesiones."</p>
+                        <p class="mt-6 font-bold">— Andrea M.</p>
+                    </div>
+                    <div class="testimonial-card bg-white/5 p-8 rounded-2xl border border-white/10">
+                        <i class="fa-solid fa-quote-left text-2xl text-[#6fb2fd]/40 mb-4 block"></i>
+                        <div class="flex gap-1 mb-4 text-yellow-400">
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                        </div>
+                        <p class="italic text-white/90 leading-relaxed">"El ambiente del centro es muy acogedor. Me sentí acompañado en todo momento de mi
+                        rehabilitación post-operatoria."</p>
+                        <p class="mt-6 font-bold">— Ricardo P.</p>
+                    </div>
+                    <div class="testimonial-card bg-white/5 p-8 rounded-2xl border border-white/10">
+                        <i class="fa-solid fa-quote-left text-2xl text-[#6fb2fd]/40 mb-4 block"></i>
+                        <div class="flex gap-1 mb-4 text-yellow-400">
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                        </div>
+                        <p class="italic text-white/90 leading-relaxed">"Totalmente recomendados para kinesiología respiratoria infantil. Trataron a mi hijo con mucha
+                        paciencia y cariño."</p>
+                        <p class="mt-6 font-bold">— Carolina S.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Instagram Section -->
+        <section class="py-16 bg-gradient-to-b from-white to-surface" id="instagram">
+            <div class="section-shell flex flex-col items-center text-center gap-6">
+                <div class="flex items-center gap-4">
+                    <img alt="Logo CEKIP" class="w-14 h-14 rounded-2xl object-cover shadow-lg" src="multimedia/logo.jpg" />
+                    <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#ff9a9e] via-[#fecfef] to-[#f5576c] text-white text-2xl shadow-lg">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <span class="pill-badge">Instagram</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-primary">Síguenos en Instagram</h2>
+                <p class="text-on-surface-variant max-w-2xl">Únete para ver casos reales, tips de recuperación y el día a día clínico en Peñablanca.</p>
+                <a class="bg-secondary text-white px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2 hover:bg-primary transition-all spotlight-card elevated-card"
+                    href="https://instagram.com/cekip.va" target="_blank">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    @cekip.va
+                </a>
+            </div>
+        </section>
+        <!-- Location & Contact -->
+        <section class="py-24 bg-surface-container-low" id="ubicacion">
+            <div class="section-shell">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="pill-badge mb-4"><i class="fa-solid fa-map-location-dot text-[0.6rem]"></i> Ubicación</span>
+                        <h2 class="text-3xl md:text-5xl font-bold text-primary mb-8 mt-2">Encuéntranos</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4 group">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d7e2ff] to-[#edf4ff] flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot text-secondary"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary">Dirección</p>
+                                    <a class="text-on-surface-variant hover:text-primary transition-colors"
+                                        href="https://www.google.com/maps/search/?api=1&query=Manuel+Montt+551%2C+Pe%C3%B1ablanca"
+                                        target="_blank">Manuel Montt #551, Peñablanca</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d7e2ff] to-[#edf4ff] flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-brands fa-whatsapp text-secondary text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary">Teléfono / WhatsApp</p>
+                                    <a class="text-on-surface-variant hover:text-primary transition-colors"
+                                        href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora."
+                                        target="_blank">+56 9 6372 3314</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d7e2ff] to-[#edf4ff] flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-brands fa-instagram text-secondary text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary">Redes Sociales</p>
+                                    <a class="text-on-surface-variant hover:text-primary transition-colors"
+                                        href="https://instagram.com/cekip.va" target="_blank">@cekip.va</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10 flex gap-4">
+                            <a class="cta-glow bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-[#1ebe5d] transition-all shadow-lg"
+                                href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora."
+                                target="_blank">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+                            </a>
+                            <a class="border border-primary/15 text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-all"
+                                href="https://www.google.com/maps/search/?api=1&query=Manuel+Montt+551%2C+Pe%C3%B1ablanca"
+                                target="_blank">
+                                <i class="fa-solid fa-map-location-dot"></i> Ver mapa
+                            </a>
+                        </div>
+                    </div>
+                    <div class="h-[450px] bg-surface-container-highest rounded-3xl overflow-hidden shadow-2xl relative">
+                        <iframe allowfullscreen="" class="w-full h-full" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://www.google.com/maps?q=Manuel+Montt+551,+Pe%C3%B1ablanca&output=embed"
+                            title="Mapa CEKIP"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-[#edf4ff] dark:bg-[#002452]/10 w-full mt-auto pt-20 pb-10 px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <img alt="Logo CEKIP" class="w-14 h-14 rounded-2xl object-cover" src="multimedia/logo.jpg" />
+                    <div class="font-['Plus_Jakarta_Sans'] font-bold text-[#002452] dark:text-[#6fb2fd] text-2xl">
+                        CEKIP</div>
+                </div>
+                <p class="font-['Inter'] text-sm leading-relaxed text-[#141c24]/70 dark:text-[#edf4ff]/70">Centro
+                    Kinésico Peñablanca. Expertos en rehabilitación física y bienestar integral.</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-primary">Links</h4>
+                <ul class="font-['Inter'] text-sm leading-relaxed space-y-3">
+                    <li><a class="inline-flex items-center gap-2 text-[#002452] dark:text-[#6fb2fd] hover:text-[#0061a5] transition-colors"
+                            href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora."
+                            target="_blank"><i class="fa-brands fa-whatsapp text-[#25D366]"></i> WhatsApp</a>
+                    </li>
+                    <li><a class="inline-flex items-center gap-2 text-[#141c24]/70 dark:text-[#edf4ff]/70 hover:text-[#002452] dark:hover:text-white transition-colors"
+                            href="https://instagram.com/cekip.va" target="_blank"><i class="fa-brands fa-instagram text-[#E1306C]"></i> Instagram</a></li>
+                    <li><a class="inline-flex items-center gap-2 text-[#141c24]/70 dark:text-[#edf4ff]/70 hover:text-[#002452] dark:hover:text-white transition-colors"
+                            href="https://www.google.com/maps/search/?api=1&query=Manuel+Montt+551%2C+Pe%C3%B1ablanca"
+                            target="_blank"><i class="fa-solid fa-location-dot text-secondary"></i> Manuel Montt #551, Peñablanca</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-primary">Horario</h4>
+                <p class="text-sm text-[#141c24]/70 dark:text-[#edf4ff]/70 flex items-center gap-2"><i class="fa-regular fa-calendar-check text-secondary/70 w-4"></i> Lunes a Viernes: 09:00 - 21:00</p>
+                <p class="text-sm text-[#141c24]/70 dark:text-[#edf4ff]/70 flex items-center gap-2"><i class="fa-regular fa-calendar-check text-secondary/70 w-4"></i> Sábados: 09:00 - 13:00</p>
+                <p class="text-sm text-[#141c24]/70 dark:text-[#edf4ff]/70 flex items-center gap-2"><i class="fa-regular fa-calendar-xmark text-red-400/70 w-4"></i> Domingos: Cerrado</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-primary/5 text-center">
+            <p class="font-['Inter'] text-sm leading-relaxed text-[#141c24]/70 dark:text-[#edf4ff]/70">© 2025 CEKIP
+                — Centro Kinésico Peñablanca. Hecho con <i class="fa-solid fa-heart text-red-400 text-xs"></i> para tu bienestar.</p>
+        </div>
+    </footer>
+    <div aria-hidden="true" class="zoom-dialog fixed inset-0 z-[70] p-4 md:p-8" hidden id="image-zoom-dialog">
+        <div class="flex h-full w-full items-center justify-center">
+            <div class="w-full max-w-6xl rounded-[2rem] border border-white/10 bg-[#0b2447]/90 shadow-2xl">
+                <div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-4 md:px-6">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.2em] text-white/45">Vista ampliada</p>
+                        <h3 class="text-lg font-bold text-white" id="image-zoom-title">Imagen</h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+                            id="zoom-out-button" type="button">-</button>
+                        <button
+                            class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+                            id="zoom-in-button" type="button">+</button>
+                        <button
+                            class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+                            id="zoom-close-button" type="button">Cerrar</button>
+                    </div>
+                </div>
+                <div class="max-h-[80vh] overflow-auto p-4 md:p-6">
+                    <div class="flex min-h-[60vh] items-center justify-center rounded-[1.5rem] bg-black/15 p-4">
+                        <img alt="" class="zoom-image max-h-[72vh] w-auto max-w-full rounded-2xl object-contain"
+                            id="image-zoom-target" src="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="floating-whatsapp fixed bottom-6 right-4 left-4 md:left-auto md:right-6 z-50 bg-[#25D366] text-white rounded-[1.25rem] md:rounded-full pl-4 pr-6 py-4 flex items-center gap-3 hover:scale-[1.02] transition-transform duration-200"
+        href="https://wa.me/56963723314?text=Hola%20CEKIP%2C%20quiero%20agendar%20una%20hora." target="_blank">
+        <span class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        </span>
+        <span class="flex flex-col leading-tight">
+            <span class="text-xs uppercase tracking-[0.18em] text-white/80">Escríbenos al WhatsApp</span>
+            <span class="text-base font-extrabold">Agenda ya</span>
+        </span>
+    </a>
+    <script>
+            (() => {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+                const mobileMenuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+                const dialog = document.getElementById('image-zoom-dialog');
+                const target = document.getElementById('image-zoom-target');
+                const title = document.getElementById('image-zoom-title');
+                const zoomInButton = document.getElementById('zoom-in-button');
+                const zoomOutButton = document.getElementById('zoom-out-button');
+                const closeButton = document.getElementById('zoom-close-button');
+                const triggers = document.querySelectorAll('[data-zoom-image]');
+                const spotlightCards = document.querySelectorAll('.spotlight-card');
+
+                spotlightCards.forEach((card) => {
+                    card.addEventListener('pointermove', (event) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = ((event.clientX - rect.left) / rect.width) * 100;
+                        const y = ((event.clientY - rect.top) / rect.height) * 100;
+                        card.style.setProperty('--x', x + '%');
+                        card.style.setProperty('--y', y + '%');
+                    });
+                    card.addEventListener('pointerleave', () => {
+                        card.style.removeProperty('--x');
+                        card.style.removeProperty('--y');
+                    });
+                });
+                let zoomLevel = 1;
+
+                const applyZoom = () => {
+                    target.style.transform = `scale(${zoomLevel})`;
+                    target.style.cursor = zoomLevel > 1 ? 'zoom-out' : 'zoom-in';
+                };
+
+                const setMobileMenuState = (open) => {
+                    if (!mobileMenu || !mobileMenuToggle) {
+                        return;
+                    }
+
+                    mobileMenu.hidden = !open;
+                    mobileMenuToggle.setAttribute('aria-expanded', String(open));
+                    mobileMenuToggle.textContent = open ? 'close' : 'menu';
+                };
+
+                const openDialog = (src, label) => {
+                    target.src = src;
+                    target.alt = label;
+                    title.textContent = label;
+                    zoomLevel = 1;
+                    applyZoom();
+                    dialog.hidden = false;
+                    dialog.setAttribute('aria-hidden', 'false');
+                    document.body.classList.add('overflow-hidden');
+                };
+
+                const closeDialog = () => {
+                    dialog.hidden = true;
+                    dialog.setAttribute('aria-hidden', 'true');
+                    document.body.classList.remove('overflow-hidden');
+                    target.src = '';
+                };
+
+                if (mobileMenu && mobileMenuToggle) {
+                    mobileMenuToggle.addEventListener('click', () => {
+                        setMobileMenuState(mobileMenu.hidden);
+                    });
+
+                    mobileMenuLinks.forEach((link) => {
+                        link.addEventListener('click', () => {
+                            setMobileMenuState(false);
+                        });
+                    });
+
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 768) {
+                            setMobileMenuState(false);
+                        }
+                    });
+                }
+
+                triggers.forEach((trigger) => {
+                    trigger.addEventListener('click', () => {
+                        openDialog(trigger.dataset.zoomImage, trigger.dataset.zoomTitle || 'Imagen');
+                    });
+                });
+
+                zoomInButton.addEventListener('click', () => {
+                    zoomLevel = Math.min(zoomLevel + 0.25, 3);
+                    applyZoom();
+                });
+
+                zoomOutButton.addEventListener('click', () => {
+                    zoomLevel = Math.max(zoomLevel - 0.25, 1);
+                    applyZoom();
+                });
+
+                target.addEventListener('click', () => {
+                    zoomLevel = zoomLevel > 1 ? 1 : 1.75;
+                    applyZoom();
+                });
+
+                closeButton.addEventListener('click', closeDialog);
+
+                dialog.addEventListener('click', (event) => {
+                    if (event.target === dialog) {
+                        closeDialog();
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && mobileMenu && !mobileMenu.hidden) {
+                        setMobileMenuState(false);
+                    }
+
+                    if (event.key === 'Escape' && !dialog.hidden) {
+                        closeDialog();
+                    }
+                });
+            })();
+    </script>
+</body>
+
+</html>
+
